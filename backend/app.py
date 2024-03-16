@@ -2,6 +2,7 @@ from flask import Flask
 from models import db
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
+from views.users import users_bp
 
 
 def create_app():
@@ -16,6 +17,8 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
+
+    app.register_blueprint(users_bp)
 
     return app
 
