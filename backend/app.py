@@ -1,7 +1,26 @@
-# app.py
 from flask import Flask
+from models import db
+from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
 
-app = Flask(__name__)
+
+def create_app():
+    app = Flask(__name__)
+    bcrypt = Bcrypt(app)
+    migrate = Migrate()
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345678@localhost:5433/haus_huling?sslmode=disable'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    bcrypt = Bcrypt()
+
+    db.init_app(app)
+    migrate.init_app(app, db)
+    bcrypt.init_app(app)
+
+    return app
+
+app = create_app()
+
 
 @app.route('/')
 def index():
