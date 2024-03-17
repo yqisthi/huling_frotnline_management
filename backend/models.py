@@ -1,26 +1,32 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
-from enum import Enum
+from sqlalchemy.dialects.postgresql import ENUM
 
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 
-# Define Enum for category selection
-class Category(Enum):
-    ADMIN = 'admin'
-    DRIVER = 'driver'
 
 # Define the User model with hashed password
 class User(db.Model):
     __tablename__ = 'hmt_users'
 
+    def serialize(self):
+        return {
+            'users_id': self.users_id,
+            'name': self.name,
+            'email': self.email,
+            'category': self.category,
+            'is_currently_login': self.is_currently_login,
+            'last_login': self.last_login
+        }
+
     users_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     _password = db.Column(db.String)  # This will store the hashed password
-    category = db.Column(db.Enum(Category))
+    category = db.Column(ENUM("admin", "driver", name="user_category", create_type=False))
     is_currently_login = db.Column(db.Boolean)
     last_login = db.Column(db.Date)
 

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import User, db
+from backend.models import User, db
 
 users_bp = Blueprint('users', __name__)
 
@@ -15,6 +15,7 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
     return jsonify(new_user.serialize()), 201
+    
 
 @users_bp.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):

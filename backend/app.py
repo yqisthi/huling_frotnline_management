@@ -1,8 +1,8 @@
 from flask import Flask
-from models import db
+from backend.models import db
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
-from views.users import users_bp
+from backend.views.users import users_bp
 
 
 def create_app():
@@ -30,4 +30,5 @@ def index():
     return 'Hello, World! This is Flask backend.'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=5000, debug=True)
+    
