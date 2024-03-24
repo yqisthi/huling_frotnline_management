@@ -1,0 +1,28 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: gainsboro;
+}
+
+.bg-gradient-purple {
+  background: linear-gradient(180deg, rgba(85, 51, 255, 0.76) 0%, #5533FF 75%);
+}
+
+.shadow-right {
+  box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Tailwind CSS */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
